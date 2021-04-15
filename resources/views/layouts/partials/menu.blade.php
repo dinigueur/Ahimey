@@ -18,7 +18,11 @@
             <div class="navbar-container main-menu-content" data-menu="menu-container">
                 <!-- include ../../../includes/mixins-->
                 <ul class="nav navbar-nav" id="main-menu-navigation" data-menu="menu-navigation">
-                    <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-layers"></i><span data-i18n="UI Elements">Catégories</span></a>
+                    <li class="dropdown nav-item" data-menu="dropdown">
+                        <a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">
+                            <i class="feather icon-layers"></i>
+                            <span data-i18n="UI Elements">Nos Catégories</span>
+                        </a>
                         <ul class="dropdown-menu">
                             @foreach(getCategories() as $category)
                                 <li class="dropdown dropdown-submenu" data-menu="dropdown-submenu">
@@ -26,10 +30,17 @@
                                         {{ $category->name }}
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li data-menu=""><a class="dropdown-item" href="data-list-view.html" data-toggle="dropdown" data-i18n="List View"><i class="feather icon-circle"></i>List View</a>
-                                        </li>
-                                        <li data-menu=""><a class="dropdown-item" href="data-thumb-view.html" data-toggle="dropdown" data-i18n="Thumb View"><i class="feather icon-circle"></i>Thumb View</a>
-                                        </li>
+                                        @foreach(getBrands() as $brand)
+                                            @if($category->name == $brand->categoryName)
+                                                <li data-menu="">
+
+                                                    <a class="dropdown-item" href="{{ route('wishlist', $brand->id) }}" data-toggle="dropdown" data-i18n="List View">
+                                                        <i class="feather icon-circle"></i>
+                                                        {{ $brand->brandName }}
+                                                    </a>
+                                                </li>
+                                            @endif
+                                        @endforeach
                                     </ul>
                                 </li>
                             @endforeach
@@ -44,12 +55,12 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{ route('shop.service') }}" class="nav-link">
                             Nos Services
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{ route('dashboard') }}" class="nav-link">
                             Nous-Contacter
                         </a>
                     </li>

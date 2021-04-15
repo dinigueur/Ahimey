@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Shop extends Model
 {
-	
+
     use HasFactory;
 
     protected $fillable = ['name', 'number', 'domain', 'address', 'logo', 'address', 'confirmationToken', 'paper_validate', 'paper_RCCM', 'user_id'
@@ -21,5 +21,10 @@ class Shop extends Model
     public function seller() {
 
         return $this->belongsTo('App\Models\Seller');
+    }
+
+    public function user() {
+
+        return $this->belongsTo('App\Models\User');
     }
 }

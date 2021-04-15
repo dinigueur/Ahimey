@@ -118,10 +118,10 @@
                                                         </span>
                                                     </div>
                                                     <div class="form-label-group">
-                                                        <input type="password" id="inputConfPassword" class="form-control" placeholder="Confirmer mot de passe" name="confirmationPassword" required>
-                                                        <label for="inputConfPassword">Confirmez mot de passe</label>
+                                                        <input type="password" id="password_confirmation" class="form-control" placeholder="Confirmer mot de passe" name="password_confirmation" required>
+                                                        <label for="password_confirmation">Confirmez mot de passe</label>
                                                         <span class="text-danger">
-                                                            @error('confirmationPassword')
+                                                            @error('password_confirmation')
                                                                 {{ $message }}
                                                             @enderror
                                                         </span>

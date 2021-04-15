@@ -1,9 +1,7 @@
 @extends('layouts/default',['title' => 'Accueil'])
 
 @section('pageCSS')
-    <!-- BEGIN: Page CSS-->
-    <link rel="stylesheet" type="text/css" href="{{ asset(!\App::environment('local') ? 'public' : ''.'storage/app-assets/css/pages/app-ecommerce-shop.css') }}">
-    <!-- END: Page CSS-->
+
 @stop
 @section('content')
 <!-- CrossFade Carousel Start -->
@@ -63,33 +61,16 @@
                 </div>
                 <div class="card-body">
                     <div class="item-wrapper">
-                        <div class="item-rating">
-                            @if($product->price >= 10000000)
-                                <div class="badge badge-warning badge-md">
-                                    5 <i class="feather icon-star ml-25"></i>
-                                </div>
-                            @elseif($product->price >= 5000000)
-                                <div class="badge badge-warning badge-md">
-                                    4 <i class="feather icon-star ml-25"></i>
-                                </div>
-                            @elseif($product->price <= 1000000 || $product->price >= 100000 )
-                                <div class="badge badge-primary badge-md">
-                                    3 <i class="feather icon-star ml-25"></i>
-                                </div>
-                            @elseif($product->price < 100000 || $product->price >= 10000 )
-                                <div class="badge badge-info badge-md">
-                                    2 <i class="feather icon-star ml-25"></i>
-                                </div>
-                            @else
-                                <div class="badge badge-info badge-md">
-                                    <i class="feather icon-star ml-25"></i>
-                                </div>
-                            @endif
-                        </div>
                         <div>
-                            <h6 class="item-price">
-                                {{ $product->price }} fcfa
-                            </h6>
+                            <span style="text-decoration: line-through">
+                                {{ $product->falsePrice }} fcfa
+                            </span>
+                        </div>
+                        <div class="item-rating">
+
+                            <div class="badge badge-primary badge-md">
+                                {{ $product->truePrice }} fcfa
+                            </div>
                         </div>
                     </div>
                     <div class="item-name">
@@ -115,6 +96,8 @@
         </div>
     @endforeach
 </section>
+
+<!-- Ecommerce Pagination Starts -->
 <section id="ecommerce-pagination">
     <div class="row">
         <div class="col-sm-12">

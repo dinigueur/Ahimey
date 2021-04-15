@@ -157,7 +157,9 @@
                                         </div>
                                         <div>
                                             <h6 class="item-price">
-                                                {{ $product->price }} fcfa
+                                                <span style="text-decoration: line-through">
+                                                    {{ $product->truePrice }} fcfa
+                                                </span>
                                             </h6>
                                         </div>
                                     </div>

@@ -72,12 +72,12 @@
                                                 <form action="{{ route('login') }}" method="POST">
                                                     @csrf
                                                     <fieldset class="form-label-group form-group position-relative has-icon-left">
-                                                        <input type="email" name="username" class="form-control" id="user-name" placeholder="Identifiant" required value="{{ old('username') }}">
+                                                        <input type="email" name="email" class="form-control" id="user-name" placeholder="Identifiant" required value="{{ old('email') }}">
                                                         <div class="form-control-position">
                                                             <i class="feather icon-user"></i>
                                                         </div>
                                                         <label for="user-name">Identifiant</label>
-                                                        @error('username')
+                                                        @error('email')
                                                             {{ $message }}
                                                         @enderror
                                                     </fieldset>

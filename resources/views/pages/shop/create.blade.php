@@ -90,12 +90,11 @@
                                         </div>
                                         <div class="col-12">
 
-                                            <button type="button" class="btn bg-gradient-danger mr-1 mb-1 waves-effect waves-light float-right">
-                                                Annuler
-                                            </button>
-
                                             <button type="button" class="btn bg-gradient-info mr-1 mb-1 waves-effect waves-light float-right">
                                                 Créer Maintenant
+                                            </button>
+                                            <button type="button" class="btn bg-gradient-danger mr-1 mb-1 waves-effect waves-light float-right">
+                                                Annuler
                                             </button>
 
                                         </div>

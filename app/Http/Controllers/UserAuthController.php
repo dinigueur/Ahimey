@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Session;
+use Validator,Redirect,Response;
+use Illuminate\Support\Facades\Auth;
+
 use Flashy;
 use App\Models\User;
 use Carbon\Carbon;
@@ -28,7 +34,7 @@ class UserAuthController extends Controller
             'email' => 'required|email|unique:users',
             'phone' => 'required|unique:users',
             'address' => 'required',
-            'password' => 'required|min:8|max:12',
+            'password' => 'required|confirmed|min:8|max:12',
         ]);
 
         User::create([
@@ -38,7 +44,7 @@ class UserAuthController extends Controller
             'address' => $request->address,
             'phone' => $request->phone,
             'confirmationToken' => Str::random(12),
-            'password' => bcrypt($request->password),
+            'password' => Hash::make($request->password),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
             //'remember_token' => Str::random(10),
@@ -59,11 +65,34 @@ class UserAuthController extends Controller
 
         $request->validate([
 
-            'username' => 'required|email',
+            'email' => 'required|email',
             'password' => 'required|min:8|max:12',
         ]);
 
-        // dd('bb');
+        // adeline@1995
+        $compte = User::where('email','=', $request->email)->first();
+        if($compte){
+            $credentials = $request->only('email', 'password');
+            if(Auth::attempt($credentials)){
+
+                flashy()->success('Vous êtes bien connecté');
+                return redirect(route('dashboard'));
+            }
+            else{
+                flashy()->error('Votre mot de passe est incorrecte');
+                return back();
+            }
+        }
+        else{
+
+            flashy()->info('Pas de compte pour ce mail');
+            return back();
+        }
+    }
+
+    public function logout() {
+        Session::flush();
+        Auth::logout();
         return redirect()->route('index');
     }
 }
